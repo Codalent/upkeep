@@ -1,4 +1,4 @@
-# repo-agents
+# upkeep — coding agents that keep your codebase in shape, on a schedule
 
 A convention for scheduled coding agents that keep their memory in your repo.
 
@@ -23,6 +23,25 @@ things.
 
 There's no runtime and nothing to install. This is Markdown, a directory
 layout, and one Node script.
+
+## Quickstart
+
+1. Copy the `agents/` folder into your repo.
+2. Edit `agents/page-speed/AGENT.md`: the build, serve and lint commands for
+   your project, and anything the agent must not touch.
+3. Replace the placeholder entries in `agents/page-speed/targets.md` with your
+   own pages, in priority order.
+4. Do a manual run first and review the PR it opens:
+
+   ```sh
+   claude "Read agents/page-speed/AGENT.md and follow it."
+   ```
+
+5. Once that looks right, point a scheduled job at the same prompt.
+
+**Run it by hand before you schedule it.** The first run is where you find out
+that your build needs an env var the runner doesn't have, or that your lint
+script is broken.
 
 ## Layout
 
@@ -68,25 +87,6 @@ node agents/page-speed/scripts/audit.mjs --url http://localhost:3000/ --label ro
 
 Requires Node 20+ and Chrome. Lighthouse is pinned to a major version so scores
 stay comparable between runs.
-
-## Quickstart
-
-1. Copy the `agents/` folder into your repo.
-2. Edit `agents/page-speed/AGENT.md`: the build, serve and lint commands for
-   your project, and anything the agent must not touch.
-3. Replace the placeholder entries in `agents/page-speed/targets.md` with your
-   own pages, in priority order.
-4. Do a manual run first and review the PR it opens:
-
-   ```sh
-   claude "Read agents/page-speed/AGENT.md and follow it."
-   ```
-
-5. Once that looks right, point a scheduled job at the same prompt.
-
-**Run it by hand before you schedule it.** The first run is where you find out
-that your build needs an env var the runner doesn't have, or that your lint
-script is broken.
 
 ## Setting up a routine
 
